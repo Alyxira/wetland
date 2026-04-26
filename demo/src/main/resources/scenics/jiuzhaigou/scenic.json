@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "id": "jiuzhaigou",
+  "name": "九寨沟景区",
+  "subtitle": "高山湖泊、瀑布与森林生态并存的世界级自然景区",
+  "description": "一个以九寨沟真实景点数据驱动的数字导览场景。游客可以先浏览景区气质，再进入地图探索、路线定制与沉浸云游。",
+  "theme": {
+    "brand": "#2ea67c",
+    "accent": "#58d2ad",
+    "background": "#07111f",
+    "surfaceMode": "glass-dark"
+  },
+  "features": {
+    "home": true,
+    "explore": true,
+    "cloudTour": true,
+    "live2d": true,
+    "routeCustomize": true,
+    "collection": true,
+    "mission": true,
+    "adventureMode": false
+  },
+  "navigation": {
+    "showOnIndex": true,
+    "sortOrder": 10
+  },
+  "seo": {
+    "title": "九寨沟景区",
+    "keywords": [
+      "九寨沟",
+      "高山湖泊",
+      "瀑布",
+      "森林生态"
+    ]
+  }
+}

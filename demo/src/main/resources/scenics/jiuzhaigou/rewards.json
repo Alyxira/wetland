@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "title": "九寨沟奖励图鉴",
+  "subtitle": "完成任务后逐步解锁印章、徽章与纪念收获，让探索过程可视化留存。",
+  "emptyState": {
+    "title": "暂未开放奖励图鉴",
+    "description": "当前景区尚未配置独立奖励内容。完成任务后，后续会在这里统一展示印章与徽章。"
+  },
+  "rewards": [
+    {
+      "id": "jiuzhai-explorer-stamp",
+      "type": "stamp",
+      "title": "九寨经典巡游章",
+      "description": "完成“经典看点首巡”后解锁的纪念印章。",
+      "icon": "🎖️",
+      "rarity": "common"
+    },
+    {
+      "id": "jiuzhai-eco-badge",
+      "type": "badge",
+      "title": "森林生态观察徽章",
+      "description": "完成“森林生态观察”后解锁的生态主题徽章。",
+      "icon": "🌲",
+      "rarity": "rare"
+    }
+  ]
+}

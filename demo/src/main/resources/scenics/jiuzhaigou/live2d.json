@@ -1,0 +1,13 @@
+﻿{
+  "version": 1,
+  "widgetName": "团子",
+  "greeting": "你好呀，我是团子，可以结合当前景区为你推荐景点与路线。",
+  "modelUrl": "/assets/live2d/model/live2d/main.model3.json",
+  "width": 240,
+  "height": 320,
+  "scale": 0.18,
+  "promptHints": [
+    "推荐一条轻松路线",
+    "哪里适合拍照？"
+  ]
+}

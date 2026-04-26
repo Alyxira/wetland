@@ -1,0 +1,37 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Logs
+*.log
+logs/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Node / frontend build artifacts
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/travel-map/node_modules/
+frontend/travel-map/dist/
+
+# Java / backend build artifacts
+demo/target/
+demo/.mvn/wrapper/maven-wrapper.jar
+
+# Local runtime data
+uploads/
+demo/uploads/
+demo/src/main/resources/python/__pycache__/
+
+# Temp / cache
+coverage/
+*.tsbuildinfo
+.eslintcache

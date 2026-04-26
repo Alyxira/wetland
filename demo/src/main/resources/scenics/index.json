@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "defaultScenicId": "jiuzhaigou",
+  "scenics": [
+    {
+      "id": "jiuzhaigou",
+      "name": "\u4e5d\u5be8\u6c9f\u666f\u533a",
+      "subtitle": "\u9002\u5408\u6162\u6e38\u3001\u62cd\u7167\u4e0e\u81ea\u7136\u89c2\u8d4f",
+      "coverImage": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80",
+      "status": "online",
+      "tags": [
+        "\u4e5d\u5be8\u6c9f",
+        "\u9ad8\u5c71\u6d77\u5b50",
+        "\u81ea\u7136\u751f\u6001"
+      ],
+      "features": {
+        "home": true,
+        "explore": true,
+        "cloudTour": true,
+        "live2d": true,
+        "routeCustomize": true,
+        "collection": true,
+        "mission": true,
+        "adventureMode": false
+      }
+    },
+    {
+      "id": "ancient-town",
+      "name": "\u9752\u77f3\u53e4\u9547",
+      "subtitle": "\u9002\u5408\u8857\u5df7\u6f2b\u6e38\u3001\u8001\u8857\u62cd\u7167\u4e0e\u4eba\u6587\u89c2\u8d4f",
+      "coverImage": "https://images.unsplash.com/photo-1518002054494-3a6f94352e9d?auto=format&fit=crop&w=1600&q=80",
+      "status": "online",
+      "tags": [
+        "\u53e4\u9547",
+        "\u8857\u5df7",
+        "\u4eba\u6587"
+      ],
+      "features": {
+        "home": true,
+        "explore": true,
+        "cloudTour": false,
+        "live2d": true,
+        "routeCustomize": true,
+        "collection": true,
+        "mission": false,
+        "adventureMode": false
+      }
+    }
+  ]
+}

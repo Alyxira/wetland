@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "hero": {
+    "title": "九寨沟景区",
+    "subtitle": "高山湖泊、瀑布与森林共存的世界自然遗产地。",
+    "description": "这里整合了景区详情、地图探索、路线定制、任务巡游与奖励图鉴。你可以先看重点景观，再进入探索页自由漫游，靠近点位触发自然发现。",
+    "image": "https://images.unsplash.com/photo-1454391304352-2bf4678b1a7a?auto=format&fit=crop&w=1600&q=80",
+    "stats": ["建议时长 1 - 2 天", "适合慢游 / 摄影 / 生态观察", "推荐上午与傍晚"]
+  },
+  "entries": [
+    {
+      "key": "explore",
+      "icon": "🧭",
+      "title": "景区探索",
+      "description": "进入地图页自由漫游，靠近真实景点时查看介绍与生态发现。",
+      "target": {
+        "type": "explore"
+      },
+      "feature": "explore"
+    },
+    {
+      "key": "mission-loop",
+      "icon": "🧩",
+      "title": "任务巡游",
+      "description": "从经典线路任务开始，按路线完成关键景点打卡并解锁奖励。",
+      "target": {
+        "type": "explore",
+        "missionId": "jiuzhai-classic-line"
+      },
+      "feature": "mission"
+    },
+    {
+      "key": "reward-gallery",
+      "icon": "🏅",
+      "title": "奖励图鉴",
+      "description": "查看已解锁和待解锁的印章、徽章，并反查对应任务来源。",
+      "target": {
+        "type": "explore",
+        "rewardId": "jiuzhai-explorer-stamp"
+      },
+      "feature": "reward"
+    },
+    {
+      "key": "route-plan",
+      "icon": "🗺️",
+      "title": "路线定制",
+      "description": "按时长与偏好生成推荐路线，并直接联动到探索地图。",
+      "target": {
+        "type": "explore",
+        "panel": "plan"
+      },
+      "feature": "routeCustomize"
+    },
+    {
+      "key": "cloud-tour",
+      "icon": "🌤️",
+      "title": "沉浸云游",
+      "description": "先通过全景建立空间印象，再决定优先游览顺序。",
+      "target": {
+        "type": "cloud-tour"
+      },
+      "feature": "cloudTour"
+    }
+  ],
+  "highlights": [
+    {
+      "title": "诺日朗瀑布",
+      "tag": "经典地标",
+      "summary": "瀑布面宽阔、气势强，适合作为进入九寨沟后的第一站。",
+      "spotId": "nuorilang-waterfall",
+      "image": "/jiuzhaigou/ecology/诺日朗瀑布.jpg"
+    },
+    {
+      "title": "五花海",
+      "tag": "色彩层次",
+      "summary": "水体清澈、湖底纹理明显，是拍摄九寨沟标志性色带的热门点位。",
+      "spotId": "wuhua-lake",
+      "image": "/jiuzhaigou/ecology/五花海.jpg"
+    },
+    {
+      "title": "熊猫海",
+      "tag": "生态观察",
+      "summary": "结合森林与湖泊景观，适合边游览边了解九寨沟代表性保护动物。",
+      "spotId": "panda-lake",
+      "image": "/jiuzhaigou/ecology/熊猫海.jpg"
+    },
+    {
+      "title": "长海",
+      "tag": "高山湖泊",
+      "summary": "海拔较高、湖面狭长，适合作为则查洼沟路线中的重点停留。",
+      "spotId": "long-lake",
+      "image": "/jiuzhaigou/ecology/长海.jpg"
+    }
+  ],
+  "infoCards": [
+    {
+      "label": "建议时长",
+      "title": "1 - 2 天",
+      "description": "如果希望覆盖三条沟的核心看点并慢节奏游览，建议安排 1 天以上。"
+    },
+    {
+      "label": "推荐时段",
+      "title": "上午与傍晚",
+      "description": "湖面光线更柔和，倒影和色带表现更稳定，整体观感更好。"
+    },
+    {
+      "label": "游览节奏",
+      "title": "分段慢游",
+      "description": "建议按沟段分段游览，不必一次走完全部点位，体验会更完整。"
+    },
+    {
+      "label": "数字体验",
+      "title": "导览 + 地图 + 图鉴",
+      "description": "地图用于定位与路线，任务与图鉴用于记录你的九寨沟探索进度。"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "wetland",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "run-p dev:main dev:travel-map",
+    "dev:main": "vite",
+    "dev:travel-map": "npm --prefix ./travel-map run dev",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
+    "@surbowl/world-geo-json-zh": "^2.1.5",
+    "api": "^6.1.3",
+    "axios": "^1.13.6",
+    "d3": "^7.9.0",
+    "echarts": "^5.6.0",
+    "echarts-liquidfill": "^3.1.0",
+    "element-plus": "^2.13.6",
+    "globestream3d": "^1.7.0",
+    "gsap": "^3.14.2",
+    "leaflet": "^1.9.4",
+    "lenis": "^1.3.21",
+    "ogl": "^1.0.11",
+    "router": "^2.2.0",
+    "three": "^0.178.0",
+    "vue": "^3.5.29",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@tsconfig/node24": "^24.0.4",
+    "@types/node": "^24.11.0",
+    "@vitejs/plugin-vue": "^6.0.4",
+    "@vue/tsconfig": "^0.8.1",
+    "npm-run-all2": "^8.0.4",
+    "typescript": "~5.9.3",
+    "vite": "^7.3.1",
+    "vite-plugin-vue-devtools": "^8.0.6",
+    "vue-tsc": "^3.2.5"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  }
+}

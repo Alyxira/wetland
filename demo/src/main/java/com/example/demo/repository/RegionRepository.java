@@ -1,0 +1,21 @@
+package com.example.demo.repository;
+
+import com.example.demo.entity.Region;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface RegionRepository extends JpaRepository<Region, Long> {
+
+    Optional<Region> findByRegionCode(String regionCode);
+
+    Optional<Region> findByRegionName(String regionName);
+
+    List<Region> findAllByOrderByRegionNameAsc();
+
+    List<Region> findByWetlandIdOrderByRegionNameAsc(Long wetlandId);
+}
+

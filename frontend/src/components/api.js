@@ -86,7 +86,15 @@ export const screenApi = {
     return api.get(endpoint)
   },
   getChinaGeoJsonUrl() {
-    return import.meta.env.VITE_SCREEN_CHINA_GEOJSON_URL || 'https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json'
+    return import.meta.env.VITE_SCREEN_CHINA_GEOJSON_URL || '/geojson/100000_full.json'
+  },
+  getChinaGeoJsonFallbackUrls() {
+    const configuredUrl = import.meta.env.VITE_SCREEN_CHINA_GEOJSON_URL
+    return [...new Set([
+      configuredUrl,
+      '/geojson/100000_full.json',
+      'https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json'
+    ].filter(Boolean))]
   }
 }
 

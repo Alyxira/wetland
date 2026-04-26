@@ -1065,8 +1065,25 @@ const createBasePlane = () => {
 
 const loadMapData = async () => {
   try {
-    const chinaRes = await fetch(screenApi.getChinaGeoJsonUrl())
-    const chinaData = await chinaRes.json()
+    let chinaData = null
+    let lastError = null
+
+    for (const url of screenApi.getChinaGeoJsonFallbackUrls()) {
+      try {
+        const chinaRes = await fetch(url)
+        if (!chinaRes.ok) {
+          throw new Error(`HTTP ${chinaRes.status} when loading ${url}`)
+        }
+        chinaData = await chinaRes.json()
+        break
+      } catch (error) {
+        lastError = error
+      }
+    }
+
+    if (!chinaData) {
+      throw lastError || new Error('China GeoJSON unavailable')
+    }
 
     chinaGroup = new THREE.Group()
     provinceMeshes = []

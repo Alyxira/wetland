@@ -3,6 +3,7 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import GlobeStream3D from 'globestream3d'
 import worldGeoJson from '@surbowl/world-geo-json-zh'
 import * as THREE from 'globestream3d/node_modules/three/build/three.module.js'
+import { screenApi } from '../api'
 
 const containerRef = ref(null)
 const tooltipRef = ref(null)
@@ -263,39 +264,53 @@ const initGlobe = async () => {
     }
     
     try {
-      const chinaResponse = await fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json')
-      
-      if (chinaResponse.ok) {
-        const chinaMapData = await chinaResponse.json()
-        
-        const worldFeatures = [...worldGeoJson.features]
-        
-        const chinaIndex = worldFeatures.findIndex(f => 
-          f.properties.name === '中国' || 
-          f.properties.iso_a2 === 'CN' || 
-          f.properties.iso_a3 === 'CHN'
-        )
-        
-        if (chinaIndex !== -1) {
-          worldFeatures.splice(chinaIndex, 1)
-        }
-        
-        chinaMapData.features.forEach(feature => {
-          if (feature.properties && feature.properties.name) {
-            feature.properties = {
-              ...feature.properties,
-              name: feature.properties.name,
-              iso_a2: 'CN',
-              iso_a3: 'CHN',
-              iso_n3: '156'
-            }
+      let chinaMapData = null
+      let lastError = null
+
+      for (const url of screenApi.getChinaGeoJsonFallbackUrls()) {
+        try {
+          const chinaResponse = await fetch(url)
+          if (!chinaResponse.ok) {
+            throw new Error(`HTTP ${chinaResponse.status} when loading ${url}`)
           }
-        })
-        
-        mergedWorldData = {
-          type: 'FeatureCollection',
-          features: [...worldFeatures, ...chinaMapData.features]
+          chinaMapData = await chinaResponse.json()
+          break
+        } catch (error) {
+          lastError = error
         }
+      }
+
+      if (!chinaMapData) {
+        throw lastError || new Error('China GeoJSON unavailable')
+      }
+
+      const worldFeatures = [...worldGeoJson.features]
+      
+      const chinaIndex = worldFeatures.findIndex(f => 
+        f.properties.name === '中国' || 
+        f.properties.iso_a2 === 'CN' || 
+        f.properties.iso_a3 === 'CHN'
+      )
+      
+      if (chinaIndex !== -1) {
+        worldFeatures.splice(chinaIndex, 1)
+      }
+      
+      chinaMapData.features.forEach(feature => {
+        if (feature.properties && feature.properties.name) {
+          feature.properties = {
+            ...feature.properties,
+            name: feature.properties.name,
+            iso_a2: 'CN',
+            iso_a3: 'CHN',
+            iso_n3: '156'
+          }
+        }
+      })
+      
+      mergedWorldData = {
+        type: 'FeatureCollection',
+        features: [...worldFeatures, ...chinaMapData.features]
       }
     } catch (fetchError) {
       console.warn('中国地图数据加载失败，使用默认数据:', fetchError)

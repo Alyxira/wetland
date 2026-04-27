@@ -578,7 +578,14 @@ function normalizeWetlandSpot(item, index = 0) {
 function normalizeWetlandSpots(payload) {
   const items = Array.isArray(payload)
     ? payload
-    : payload?.wetlands || payload?.items || payload?.records || payload?.list || payload?.data || []
+    : payload?.wetlands
+      || payload?.items
+      || payload?.records
+      || payload?.list
+      || payload?.spots
+      || payload?.data?.spots
+      || payload?.data
+      || []
   if (!Array.isArray(items)) {
     return FALLBACK_SPOTS
   }

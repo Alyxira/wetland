@@ -26,6 +26,11 @@ export const CURRENT_LOCATION = {
   pinyin: "Wuhan"
 };
 
+const API_ORIGIN = String(import.meta.env.VITE_API_ORIGIN || "").trim();
+const WETLAND_SPOTS_ENDPOINT = API_ORIGIN
+  ? `${API_ORIGIN}/api/consult/wetlands/spots`
+  : "/api/consult/wetlands/spots";
+
 export const SPOTS: Spot[] = [
   {
     id: "jiuzhaigou",
@@ -192,28 +197,37 @@ function normalizeRemoteSpot(input: WetlandMapSpotDto, index: number): Spot | nu
 }
 
 export async function fetchWetlandSpots(signal?: AbortSignal): Promise<Spot[]> {
-  const response = await fetch("/api/consult/wetlands/spots", {
-    method: "GET",
-    headers: { Accept: "application/json" },
-    signal,
-  });
+  try {
+    const response = await fetch(WETLAND_SPOTS_ENDPOINT, {
+      method: "GET",
+      headers: { Accept: "application/json" },
+      signal,
+    });
 
-  if (!response.ok) {
-    throw new Error(`failed to fetch wetland spots: ${response.status}`);
+    if (!response.ok) {
+      throw new Error(`failed to fetch wetland spots: ${response.status}`);
+    }
+
+    const payload = (await response.json()) as ApiResponse<WetlandMapPayloadDto>;
+    const rows = payload?.data?.spots;
+    if (!payload?.success || !Array.isArray(rows)) {
+      throw new Error(payload?.message || "invalid wetland spots payload");
+    }
+
+    const spots = rows
+      .map((item, index) => normalizeRemoteSpot(item, index))
+      .filter((item): item is Spot => item != null);
+
+    if (!spots.length) {
+      throw new Error("wetland spots list is empty");
+    }
+    return spots;
+  } catch (err) {
+    // If running as a purely static site (Cloudflare Pages) there may be no backend API.
+    // Fall back to the bundled SPOTS so the UI remains usable.
+    // Log the error for visibility in browser console.
+    // eslint-disable-next-line no-console
+    console.warn('[travel-map] fetchWetlandSpots failed, falling back to local SPOTS:', err);
+    return SPOTS;
   }
-
-  const payload = (await response.json()) as ApiResponse<WetlandMapPayloadDto>;
-  const rows = payload?.data?.spots;
-  if (!payload?.success || !Array.isArray(rows)) {
-    throw new Error(payload?.message || "invalid wetland spots payload");
-  }
-
-  const spots = rows
-    .map((item, index) => normalizeRemoteSpot(item, index))
-    .filter((item): item is Spot => item != null);
-
-  if (!spots.length) {
-    throw new Error("wetland spots list is empty");
-  }
-  return spots;
 }

@@ -9,7 +9,7 @@
     "dev:travel-map": "npm --prefix ./travel-map run dev",
     "build": "run-s type-check build:main build:travel-map sync:travel-map",
     "build:main": "vite build",
-    "build:travel-map": "npm --prefix ./travel-map run build",
+    "build:travel-map": "npm --prefix ./travel-map ci && npm --prefix ./travel-map run build",
     "preview": "vite preview",
     "build-only": "vite build",
     "sync:travel-map": "node ./scripts/sync-travel-map-dist.mjs",

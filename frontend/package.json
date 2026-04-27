@@ -7,9 +7,12 @@
     "dev": "run-p dev:main dev:travel-map",
     "dev:main": "vite",
     "dev:travel-map": "npm --prefix ./travel-map run dev",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "build": "run-s type-check build:main build:travel-map sync:travel-map",
+    "build:main": "vite build",
+    "build:travel-map": "npm --prefix ./travel-map run build",
     "preview": "vite preview",
     "build-only": "vite build",
+    "sync:travel-map": "node ./scripts/sync-travel-map-dist.mjs",
     "type-check": "vue-tsc --build"
   },
   "dependencies": {

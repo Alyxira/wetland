@@ -2,7 +2,7 @@ import axios from 'axios'
 import { DEFAULT_SCENIC_ID, normalizeScenicId } from '../utils/scenic'
 
 export const api = axios.create({
-  baseURL: '/',
+  baseURL: import.meta.env.VITE_API_ORIGIN || '/',
   timeout: 60000
 })
 

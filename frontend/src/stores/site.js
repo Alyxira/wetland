@@ -1,10 +1,48 @@
 import axios from 'axios'
+import { resolveAssetUrl } from '../utils/assets'
 import { DEFAULT_SCENIC_ID, normalizeScenicId } from '../utils/scenic'
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_ORIGIN || '/',
   timeout: 60000
 })
+
+const SCENIC_ASSET_FIELD_SET = new Set([
+  'image',
+  'imageUrl',
+  'coverImage',
+  'heroImage',
+  'poster'
+])
+
+function normalizeScenicAssetValue(value) {
+  if (typeof value !== 'string') {
+    return value
+  }
+  const raw = value.trim()
+  if (!raw) {
+    return value
+  }
+  return resolveAssetUrl(raw, raw)
+}
+
+function normalizeScenicPayload(value, parentKey = '') {
+  if (Array.isArray(value)) {
+    return value.map((item) => normalizeScenicPayload(item, parentKey))
+  }
+
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, nestedValue]) => [key, normalizeScenicPayload(nestedValue, key)])
+    )
+  }
+
+  if (SCENIC_ASSET_FIELD_SET.has(parentKey)) {
+    return normalizeScenicAssetValue(value)
+  }
+
+  return value
+}
 
 function normalizeApiSegment(segment = '') {
   return String(segment || '').replace(/^\/+|\/+$/g, '')
@@ -54,7 +92,7 @@ export async function request(url, options = {}) {
   if (!payload?.success) {
     throw new Error(payload?.message || '请求失败')
   }
-  return payload.data
+  return normalizeScenicPayload(payload.data)
 }
 
 function createScenicBucket() {
